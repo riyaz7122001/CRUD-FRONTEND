@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Navbar from "../NavBar/Navbar";
@@ -13,14 +13,6 @@ const AddProduct = () => {
   const [CategoryId, setCategoryId] = useState("");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    fetch(`${api}/product/getProduct`)
-      .then((response) => response.json())
-      .then((result) => console.log("response", result))
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const handleAddProduct = async (e) => {
     e.preventDefault();

@@ -6,15 +6,24 @@ import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 const Category = () => {
   const [category, setCategory] = useState([]);
+
   useEffect(() => {
-    fetch(`${api}/category/getCategory`)
-      .then((response) => response.json())
-      .then((result) => setCategory(result.data))
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${api}/category/getCategory`);
+        let result = await response.json();
+        if (result) setCategory(result.data);
+      } catch (error) {
+        toast.error("Error while loading the data...", {
+          hideProgressBar: true,
+          autoClose: 2000,
+        });
+      }
+    };
+    fetchData();
   }, []);
 
   const handleDelete = async (id) => {
@@ -22,14 +31,7 @@ const Category = () => {
       await axios.delete(`${api}/category/deleteCategory/${id}`);
       window.location.reload();
     } catch (error) {
-      toast.error(error);
-    }
-  };
-
-  const handleEdit = async (id) => {
-    try {
-    } catch (error) {
-      toast.error("Failed to edit category. Please try again.", {
+      toast.error("Error while deleting...", {
         hideProgressBar: true,
         autoClose: 2000,
       });
@@ -86,12 +88,8 @@ const Category = () => {
                       </td>
                       {console.log(category)}
                       <td>
-                        <NavLink to="/updateCategory">
-                          <Button
-                            onClick={() => handleEdit(category)}
-                            variant="primary"
-                            style={{ margin: "10px" }}
-                          >
+                        <NavLink to={`/updateCategory/${category.CategoryId}`}>
+                          <Button variant="primary" style={{ margin: "10px" }}>
                             Edit
                           </Button>
                         </NavLink>

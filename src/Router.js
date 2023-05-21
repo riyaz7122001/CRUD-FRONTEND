@@ -17,8 +17,8 @@ const Router = () => {
         <Route path="/products" element={<Product />} />
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/addCategory" element={<AddCategory />} />
-        <Route path="/updateCategory" element={<UpdateCategory />} />
-        <Route path="/updateProduct" element={<UpdateProduct />} />
+        <Route path="/updateCategory/:id" element={<UpdateCategory />} />
+        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
       </Routes>
     </MainRouter>
   );

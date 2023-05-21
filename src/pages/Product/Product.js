@@ -92,7 +92,7 @@ const Product = () => {
                         </h5>
                       </td>
                       <td>
-                        <NavLink to="/updateProduct">
+                        <NavLink to={`/updateProduct/${product.ProductId}`}>
                           <Button variant="primary" style={{ margin: "10px" }}>
                             Edit
                           </Button>
