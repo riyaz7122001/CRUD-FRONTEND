@@ -4,7 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { api } from "../../utils/constants";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 const Category = () => {
   const [category, setCategory] = useState([]);
   useEffect(() => {
@@ -15,6 +16,26 @@ const Category = () => {
         console.log(err);
       });
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${api}/category/deleteCategory/${id}`);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  const handleEdit = async (id) => {
+    try {
+    } catch (error) {
+      toast.error("Failed to edit category. Please try again.", {
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -63,15 +84,23 @@ const Category = () => {
                           {category.CategoryName}
                         </h5>
                       </td>
-
+                      {console.log(category)}
                       <td>
-                        <NavLink to={"/products"}>
-                          <Button variant="primary" style={{ margin: "10px" }}>
+                        <NavLink to="/updateCategory">
+                          <Button
+                            onClick={() => handleEdit(category)}
+                            variant="primary"
+                            style={{ margin: "10px" }}
+                          >
                             Edit
                           </Button>
                         </NavLink>
-                        <NavLink to={"/categories"}>
-                          <Button variant="primary" style={{ margin: "10px" }}>
+                        <NavLink>
+                          <Button
+                            variant="primary"
+                            onClick={() => handleDelete(category.CategoryId)}
+                            style={{ margin: "10px" }}
+                          >
                             Delete
                           </Button>
                         </NavLink>

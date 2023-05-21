@@ -7,41 +7,19 @@ import { api } from "../../utils/constants";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const AddCategory = () => {
+const UpdateCategory = () => {
   const [CategoryId, setCategoryId] = useState("");
   const [CategoryName, setCategoryName] = useState("");
 
   const navigate = useNavigate();
 
-  const handleAddCategory = async (e) => {
-    e.preventDefault();
-    if (CategoryId === "" || CategoryName === "") {
-      toast.warn("Please fill all the details", {
-        hideProgressBar: true,
-        autoClose: 2000,
-      });
-      return;
-    }
-    try {
-      const response = await axios.post(`${api}/category/createCategory`, {
-        CategoryId,
-        CategoryName,
-      });
-      console.log(response);
-      navigate("/");
-    } catch (error) {
-      toast.error("Failed to add category. Please try again.", {
-        hideProgressBar: true,
-        autoClose: 2000,
-      });
-    }
-  };
+  const handleUpdateCategory = async () => {};
   return (
     <>
       <Navbar />
       <div className="container">
-        <h1>Add Category</h1>
-        <Form onSubmit={handleAddCategory}>
+        <h1>Update Category</h1>
+        <Form onSubmit={handleUpdateCategory}>
           <Form.Group className="mb-3" controlId="CategoryId">
             <Form.Label>Category Id</Form.Label>
             <Form.Control
@@ -73,4 +51,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default UpdateCategory;

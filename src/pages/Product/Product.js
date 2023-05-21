@@ -3,6 +3,8 @@ import Navbar from "../NavBar/Navbar";
 import { api } from "../../utils/constants";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -16,6 +18,15 @@ const Product = () => {
         console.log(err);
       });
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${api}/product/deleteProduct/${id}`);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -81,13 +92,17 @@ const Product = () => {
                         </h5>
                       </td>
                       <td>
-                        <NavLink to={"/"}>
+                        <NavLink to="/updateProduct">
                           <Button variant="primary" style={{ margin: "10px" }}>
                             Edit
                           </Button>
                         </NavLink>
-                        <NavLink to={"/"}>
-                          <Button variant="primary" style={{ margin: "10px" }}>
+                        <NavLink>
+                          <Button
+                            variant="primary"
+                            onClick={() => handleDelete(product.ProductId)}
+                            style={{ margin: "10px" }}
+                          >
                             Delete
                           </Button>
                         </NavLink>

@@ -5,16 +5,20 @@ import Category from "./pages/Category/Category";
 import Product from "./pages/Product/Product";
 import AddProduct from "./pages/Product/AddProduct";
 import AddCategory from "./pages/Category/AddCategory";
+import UpdateCategory from "./pages/Category/UpdateCategory";
+import UpdateProduct from "./pages//Product/UpdateProduct";
 
 const Router = () => {
   return (
     <MainRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/categories" element={<Category />} />
         <Route path="/products" element={<Product />} />
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/addCategory" element={<AddCategory />} />
+        <Route path="/updateCategory" element={<UpdateCategory />} />
+        <Route path="/updateProduct" element={<UpdateProduct />} />
       </Routes>
     </MainRouter>
   );
